@@ -1,0 +1,11 @@
+__pycache__/
+**/__pycache__/
+.DS_Store
+**/.DS_Store
+
+# Data directories
+gw_confined_data/
+gw_unconfined_data/
+karst_data/
+sw_data/
+manuscript_plots/

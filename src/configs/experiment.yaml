@@ -1,0 +1,39 @@
+# ── Experiment identity ────────────────────────────────────────────────────────
+name: data_resolution_study
+base_dir: /Users/xl3138/workspaces/framework_DNN_res_error
+dataset: gw_confined_data #gw_unconfined_data | gw_confined_data | sw_data |  karst_data
+
+# ── Sampling strategy ─────────────────────────────────────────────────────────
+# random | lhs | corners
+# "corners" is recommended to anchor the power-law fit at the extremes.
+sampling_strategy: random
+sampling_budget: 20
+
+# ── Model ─────────────────────────────────────────────────────────────────────
+# The model module must be listed here so the registry can import it.
+model: lstm
+model_modules:
+  - models.lstm
+
+# Architecture hyperparameters (passed to build_model via standard interface)
+input_dim: 1
+output_dim: 1
+hidden_dim: 8
+num_layers: 5
+dropout_rate: 0.4
+
+
+# ── Training ──────────────────────────────────────────────────────────────────
+epochs: 300
+learning_rate: 0.0001
+batch_size: 16  
+patience: 15
+
+# ── MC Dropout inference ───────────────────────────────────────────────────────
+num_real: 150
+mc_dropout_rate: 0.3
+
+# ── Surface fitting for run_experiment.py ────────────────────────────────────────────────────────────
+metric: RMSE            # which error metric to fit the surface on. RMSE | MAE | MSE | MAPE
+scaling_form: power_law # power_law | auto
+confidence: 0.95        # confidence level for extrapolated intervals
