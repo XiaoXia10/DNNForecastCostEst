@@ -6,8 +6,10 @@ Plot predicted mean +/- uncertainty band against measured values for one
 arrays saved by train.py.
 
 uncertainty.npy holds the variance of the MC dropout realizations
-(predictions.var(dim=0) in train.py), not a calibrated confidence interval,
-so it is plotted directly as the band half-width.
+(predictions.var(dim=0) in train.py), not a calibrated confidence interval.
+The plotted band uses its square root (standard deviation) as the
+half-width, since variance is in squared units and isn't directly
+comparable to the mean prediction.
 
 Usage
 -----
@@ -62,9 +64,10 @@ def plot_uncertainty(ddir, resolution, horizon):
         fig = plt.figure(figsize=(20, 10))
         plt.plot(time, real[:, f], label="Measured", linewidth=3)
         plt.plot(time, mean[:, f], label="Predicted", linewidth=3)
+        std = np.sqrt(np.clip(uncertainty[:, f], 0, None))
         plt.fill_between(
-            time, mean[:, f] - uncertainty[:, f], mean[:, f] + uncertainty[:, f],
-            color="green", alpha=0.5, label="Uncertainty",
+            time, mean[:, f] - std, mean[:, f] + std,
+            color="green", alpha=0.5, label="Uncertainty (±1 std, MC dropout)",
         )
 
         plt.title(f"{resolution} | horizon={horizon} | MC Dropout Uncertainty", fontsize=35)

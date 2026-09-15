@@ -1,6 +1,6 @@
 # Cost Efficient Estimation of Deep Learning Forecast Error Surfaces from Sparse Resolution-Horizon Sampling: A Model Agnostic Framework
 
-**Authors: Xiao Xia Liang, Dany Lauzon, Erwan Gloaguen, Reed Maxwell**
+**Authors: Xiao Xia Liang, Dany Lauzon, Reed Maxwell**
 
 ## Overview
 

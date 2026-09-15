@@ -8,4 +8,5 @@ gw_confined_data/
 gw_unconfined_data/
 karst_data/
 sw_data/
-manuscript_plots/
+manuscript_plotting/
+manuscript/
